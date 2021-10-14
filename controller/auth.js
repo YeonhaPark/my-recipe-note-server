@@ -9,20 +9,24 @@ function createJwtToken(id) {
 }
 
 export async function signup(req, res) {
-  const { username, password } = req.body;
-  if (await userRepository.findByUsername(username)) {
-    // 에러 뱉기. 이미 가입한 회원임.
-    return res.status(409).json({ message: `${username} already exists` });
-  } else {
-    const hashed = await bcrypt.hash(password, auth.bcryptSaltRounds);
+  try {
+    const { username, password } = req.body;
+    if (await userRepository.findByUsername(username)) {
+      // 에러 뱉기. 이미 가입한 회원임.
+      return res.status(409).json({ message: `${username} already exists` });
+    } else {
+      const hashed = await bcrypt.hash(password, auth.bcryptSaltRounds);
 
-    const userId = await userRepository.createUser({
-      username,
-      password: hashed,
-    });
+      const userId = await userRepository.createUser({
+        username,
+        password: hashed,
+      });
 
-    const token = createJwtToken(userId);
-    res.status(200).json({ token, username });
+      const token = createJwtToken(userId);
+      res.status(200).json({ token, username });
+    }
+  } catch (err) {
+    console.error(err);
   }
 }
 
