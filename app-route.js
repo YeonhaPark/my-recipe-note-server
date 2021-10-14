@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('combined'));
 app.use(express.urlencoded({ extended: false })); // HTML form으로 제출했을때 그떄 받은 폼을 body 안에 자동으로 파싱해줌.
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 
 const options = {
