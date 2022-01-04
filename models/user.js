@@ -4,11 +4,7 @@ export default class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        username: {
-          type: Sequelize.DataTypes.STRING(128),
-          allowNull: false,
-        },
-        password: {
+        googleId: {
           type: Sequelize.DataTypes.STRING(128),
           allowNull: false,
         },

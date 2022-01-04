@@ -11,9 +11,12 @@ function required(key, defaultValue = undefined) {
 }
 export const config = {
   auth: {
+    googleClientId: required('GOOGLE_CLIENT_ID'),
+    googleClientSecret: required('GOOGLE_CLIENT_SECRET'),
     jwtSecret: required('JWT_SECRET'),
     jwtExpiresSec: parseInt(required('JWT_EXPIRES_SEC', 86400)),
     bcryptSaltRounds: parseInt(required('BCRYPT_SALT_ROUNDS', 12)),
+    cookieKey: required('COOKIE_KEY'),
   },
   port: parseInt(required('PORT', 8081)),
   db: {

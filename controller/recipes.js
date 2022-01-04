@@ -6,21 +6,13 @@ import * as recipeRepository from '../data/recipes.js';
  */
 
 export async function getTags(req, res) {
-  if (!req.headers.authorization) {
-    return res.status(401).json({ message: 'No credentials sent' });
-  }
-  // isAuth에서 userId를 등록해주었음
   const result = await recipeRepository.getAllTags(req.userId, req.query.title);
   res.status(200).json(result);
 }
 
 export async function getRecipes(req, res) {
-  if (!req.headers.authorization) {
-    return res.status(401).json({ message: 'No credentials sent' });
-  }
   const { title, tag } = req.query;
   if (!title && !tag) {
-    // isAuth에서 userId를 등록해주었음
     const result = await recipeRepository.getAll(req.userId);
     res.status(200).json(result);
   } else {
@@ -61,7 +53,6 @@ export async function postRecipe(req, res) {
 }
 
 export async function updateRecipe(req, res) {
-  console.log('updateRecipe called');
   const { id } = req.params;
   const { body } = req;
   const updated = await recipeRepository.update(id, body);

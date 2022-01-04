@@ -24,7 +24,6 @@ const sequelize = new Sequelize(
     },
   }
 );
-
 db.sequelize = sequelize;
 db.User = User;
 db.Recipe = Recipe;
