@@ -55,7 +55,7 @@ app.use((err, req, res, next) => {
   console.error(err);
   res.sendStatus(500);
 });
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
   console.log(`Server started...${new Date()}`);
   app.listen(config.port);
 });
