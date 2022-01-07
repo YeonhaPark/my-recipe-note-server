@@ -32,8 +32,6 @@ app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // how long this cookie could exist in browser
     keys: [config.auth.cookieKey],
-    sameSite: 'none',
-    secure: true,
   })
 );
 
