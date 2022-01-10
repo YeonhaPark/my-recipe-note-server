@@ -13,20 +13,10 @@ router.get(
 router.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    failureRedirect: `${
-      process.env.NODE_ENV === 'development'
-        ? process.env.CLIENT_SERVER_DEV
-        : process.env.CLIENT_SERVER_PROD
-    }/login`,
+    failureRedirect: `${process.env.CORS_ALLOW_ORIGIN}/login`,
   }),
   (req, res) => {
-    res.redirect(
-      `${
-        process.env.NODE_ENV === 'development'
-          ? process.env.CLIENT_SERVER_DEV
-          : process.env.CLIENT_SERVER_PROD
-      }/main`
-    );
+    res.redirect(`${process.env.CORS_ALLOW_ORIGIN}/main`);
   }
 );
 
