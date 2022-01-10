@@ -27,9 +27,6 @@ export const config = {
     password: required('DB_PASSWORD'),
   },
   cors: {
-    allowedOrigin:
-      process.env.NODE_ENV === 'development'
-        ? required('CORS_ALLOW_ORIGIN_DEV')
-        : required('CORS_ALLOW_ORIGIN'),
+    allowedOrigin: required('CORS_ALLOW_ORIGIN'),
   },
 };
