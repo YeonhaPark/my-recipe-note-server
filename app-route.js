@@ -23,6 +23,8 @@ const whitelist = [
 const corsOptions = {
   origin: whitelist,
   credentials: true,
+  sameSite: 'lax',
+  secure: process.env.NODE_ENV === 'production',
   allowedHeaders: ['Origin, X-Requested-With, Content-Type, Accept'],
 };
 
