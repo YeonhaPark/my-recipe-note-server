@@ -13,11 +13,9 @@ router.get(
 router.get(
   '/auth/google/callback',
   passport.authenticate('google', {
+    successRedirect: `${process.env.CORS_ALLOW_ORIGIN}/main`,
     failureRedirect: `${process.env.CORS_ALLOW_ORIGIN}/login`,
-  }),
-  (req, res) => {
-    res.redirect(`${process.env.CORS_ALLOW_ORIGIN}/main`);
-  }
+  })
 );
 
 router.get('/api/logout', (req, res) => {
