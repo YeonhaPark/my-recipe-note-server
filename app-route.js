@@ -16,7 +16,6 @@ import './services/passport.js';
 const app = express();
 const whitelist = [
   'http://localhost:3000',
-  'http://127.0.0.1:3000',
   'https://my-recipe-note-app.netlify.app',
 ];
 
@@ -25,6 +24,9 @@ const corsOptions = {
   credentials: true,
   sameSite: 'lax',
   secure: process.env.NODE_ENV === 'production',
+  methods: 'GET,PUT,POST,DELETE,UPDATE,OPTIONS',
+  allowedHeaders:
+    'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
 };
 
 app.set('trust proxy', 1);
