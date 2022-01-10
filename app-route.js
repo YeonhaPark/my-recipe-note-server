@@ -22,7 +22,7 @@ const whitelist = [
 const corsOptions = {
   origin: whitelist,
   credentials: true,
-  sameSite: 'lax',
+  sameSite: 'none',
   secure: process.env.NODE_ENV === 'production',
   methods: 'GET,PUT,POST,DELETE,UPDATE,OPTIONS',
   allowedHeaders:
@@ -30,6 +30,7 @@ const corsOptions = {
 };
 
 app.set('trust proxy', 1);
+
 app.use(cors(corsOptions));
 app.use(
   cookieSession({
