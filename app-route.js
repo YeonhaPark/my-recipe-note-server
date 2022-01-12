@@ -30,6 +30,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsConfig));
 app.set('trust proxy', 1);
 app.use(
   cookieSession({
