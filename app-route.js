@@ -22,8 +22,7 @@ const whitelist = [
 const corsOptions = {
   origin: whitelist,
   credentials: true,
-  sameSite: 'none',
-  secure: true,
+  secure: false,
   methods: 'GET,PUT,POST,DELETE,UPDATE,OPTIONS',
   allowedHeaders:
     'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
