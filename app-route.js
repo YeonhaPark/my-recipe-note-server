@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import passport from 'passport';
 import morgan from 'morgan'; // 사용자에게 받은 요청에 대해 매번 console해줄 필요 없이 자동으로 로그 생성 https://github.com/expressjs/morgan
@@ -17,21 +16,21 @@ const app = express();
 const whitelist = [
   'http://localhost:3000',
   'https://my-recipe-note-app.netlify.app',
+  'https://my-recipe-note-back.herokuapp.com',
 ];
 
 const corsOptions = {
   origin: whitelist,
   credentials: true,
   sameSite: 'none',
-  secure: process.env.NODE_ENV === 'production',
+  secure: true,
   methods: 'GET,PUT,POST,DELETE,UPDATE,OPTIONS',
   allowedHeaders:
     'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept',
 };
 
-app.set('trust proxy', 1);
-
 app.use(cors(corsOptions));
+app.set('trust proxy', 1);
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // how long this cookie could exist in browser
@@ -39,7 +38,6 @@ app.use(
   })
 );
 
-app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
