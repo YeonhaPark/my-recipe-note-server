@@ -25,6 +25,7 @@ router.get('/api/logout', (req, res) => {
 
 router.get('/api/current_user', (req, res) => {
   res.send(req.user);
+  res.setHeader('Access-Control-Allow-Headers', 'Set-Cookie');
 });
 
 export default router;
