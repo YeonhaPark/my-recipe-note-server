@@ -147,15 +147,24 @@ export async function update(id, recipe) {
   });
 
   if (ingredients) {
-    const result = await Promise.all(
-      ingredients.map((ingredient) => {
-        return Ingredient.findOrCreate({
-          where: { name: ingredient.name },
-          defaults: { isChecked: false },
+    const updatedIngs = await Promise.all(
+      ingredients.map((ing) => {
+        return Ingredient.findOne({ where: { name: ing.name } }).then(function (
+          obj
+        ) {
+          const newIngVal = {
+            ...obj,
+            isChecked: ing.isChecked,
+          };
+          if (obj) {
+            return obj.update(newIngVal);
+          } else {
+            return Ingredient.create(ing);
+          }
         });
       })
     );
-    if (result) await updatedRecipe.addIngredients(result.map((r) => r[0]));
+    if (updatedIngs) await updatedRecipe.addIngredients(updatedIngs);
   }
 
   const recipeTags = await Tag.findAll({
